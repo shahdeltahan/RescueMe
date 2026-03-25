@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap');
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    text-decoration: none;
+    list-style: none;
+}
+html{
+    font-family: poppins,'segoe ui', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    line-height: 12pt;
+    color: var(--text-clr);
+}
+body{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: var(--base-clr);
+    color: var(--seconary-text-clr);
+    overflow: hidden;
+}
+.wrapper{
+    box-sizing: border-box;
+    background-color: var(--base-clr);
+    height: 100vh;
+    width: max(40%, 600px);
+    padding: 10px;
+    border-radius: 0 20px 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper .title{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 10px;
+}
+.wrapper .title svg{
+    width: 90px;
+    height: 90px;
+    fill:var(--accent-clr);
+    display: block;
+}
+
+ h1{
+    font-size: 2.8rem;
+    font-weight: 900;
+    text-transform: capitalize;
+}
+form{
+    width: min(400px, 100%);
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+form > div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+form label{
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
+    background-color: var(--accent-clr);
+    fill:var(--base-clr);
+    color: var(--base-clr);
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+form input{
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 1em;
+    font: inherit;
+    border-radius: 0 10px 10px 0;
+    border: none;
+    border: 2px solid var(--input-color);
+    border-left: none ;
+    background-color: var(--text-clr);
+    transition: 150ms ease;
+
+}
+form input:hover{
+    border-color: var(--accent-clr);
+}
+form input:focus{
+    border-color: var(--seconary-text-clr);
+    outline: none;
+}
+div:has(input:focus) > label{
+    background-color: var(--seconary-text-clr);
+}
+form input::placeholder{
+    color: var(--seconary-text-clr);
+}
+form button{
+margin-top: 10px;
+border: none;
+border-radius: 1000px;
+padding: 0.85em 4em;
+background-color: var(--accent-clr);
+color: var(--base-clr);
+font: inherit;
+font-weight: 600;
+text-transform: capitalize;
+cursor: pointer;
+transition: 150ms ease;
+}
+form button :hover{
+    background-color: var(--text-clr);
+}
+form button:focus{
+outline: none;
+background-color: var(--seconary-text-clr);
+}
+a{
+    text-decoration: none;
+    color: var(--accent-clr);
+}
+a:hover{
+    text-decoration: underline;
+}
+.btn{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color:var(--accent-clr);
+  color: var(--text-clr);
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.role-label {
+    flex-shrink: 0;
+    height: 50px;
+    width: 50px;
+    background-color: var(--accent-clr);
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.role-label svg {
+    width: 22px;
+    height: 22px;
+    fill: var(--base-clr);
+}
+select#role-input {
+    flex-grow: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 0 2.5em 0 1em;
+    font: inherit;
+    font-size: .95rem;
+    color: var(--input-color);
+    background-color: var(--text-clr);
+    border: 2px solid var(--text-clr);
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 150ms ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23b0b3c1'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 22px;
+}
+select#role-input option{
+    background-color: var(--hover-clr); 
+    color: var(--text-clr);
+}
+select#role-input:hover{
+    border-color: var(--accent-clr);
+}
+select#role-input:focus{
+     border-color: var(--secondary-text-clr); 
+     outline: none; 
+    }
+ 
+@media(max-width:1100px) {
+    .wrapper{
+        width: min(600px,100%);
+        border-radius: 0;
+    }
+}
+
+form div.incorrect label{
+    background-color: tomato;
+}
+form div.incorrect input{
+    border-color: tomato;
+}
+#error-message{
+ color: tomato;   
+}
