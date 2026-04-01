@@ -164,7 +164,7 @@ select#role-input {
     padding: 0 2.5em 0 1em;
     font: inherit;
     font-size: .95rem;
-    color: var(--input-color);
+    color: var(--base-clr);
     background-color: var(--text-clr);
     border: 2px solid var(--text-clr);
     border-left: none;

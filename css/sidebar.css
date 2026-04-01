@@ -34,21 +34,67 @@ body{
     list-style: none;
 
 }
-#sidebar >  ul > li:first-child{
+#sidebar > ul > li:first-child {
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
-    .logo{
-        font-weight: 600;
-    }
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px; /* reduced from 16px */
+    padding: .85em .85em .4em .85em; /* less bottom padding */
 }
+
+#sidebar.close > ul > li:first-child {
+    align-items: center;
+    padding: .5em;
+}
+#sidebar.close a span {
+    display: none;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.02em;
+    color: var(--text-clr);
+    display: block;
+    transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+#sidebar.close .logo {
+    opacity: 0;
+    display: none;
+    pointer-events: none;
+    transform: translateX(-8px);
+}
+.logo-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.tagline {
+    font-size: 0.72rem;
+    font-weight: 400;
+    color: var(--secondary-text-clr);
+    letter-spacing: 0.06em;
+    text-transform: none;
+    margin-top: 3px;
+    opacity: 1;
+    transition: opacity 300ms ease, max-height 300ms ease;
+    max-height: 20px;
+    overflow: hidden;
+}
+
+#sidebar.close .tagline {
+    opacity: 0;
+    max-height: 0;
+}
+
 #sidebar ul li.active a{
     color: var(--accent-clr);
     svg{
         fill: var(--accent-clr);
     }
 }
-#sidebar a, #sidebar .logo{
+#sidebar a {
     border-radius: 0.5em;
     padding: .85em;
     text-decoration: none;
@@ -58,6 +104,14 @@ body{
     gap: 1em;
 }
 
+/* logo stands alone - no padding, no flex */
+#sidebar .logo {
+    border-radius: 0;
+    padding: 0;
+    text-decoration: none;
+    color: var(--text-clr);
+    display: block;
+}
 
 #sidebar svg{
     flex-shrink: 0;
