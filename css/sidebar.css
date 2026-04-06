@@ -87,3 +87,98 @@ svg{
 #toggle-btn:hover{
     background-color: var(--hover-clr);
 }
+
+/* Dark mode variables (default)*/
+:root {
+    --base-clr:           #11121a;
+    --line-clr:           #42434a;
+    --hover-clr:          #222533;
+    --text-clr:           #e6e6e6;
+    --accent-clr:         #5e63ff;
+    --secondary-text-clr: #b0b3c1;
+    --input-color:        #191a20;
+    --card-clr:           #191a24;
+    --success-clr:        #4caf82;
+    --warning-clr:        #ef7524;
+    --danger-clr:         #d52d2d;
+}
+/* 
+   LIGHT MODE – class strategy  */ 
+  
+:root.light-mode {
+    --base-clr:            #f0f2fa;
+    --line-clr:            #d0d3e8;
+    --hover-clr:           #e4e7f5;
+    --text-clr:            #1a1b2e;
+    --accent-clr:          #5e63ff;
+    --secondary-text-clr:  #5a5d7a;
+    --input-color:         #ffffff;
+    --card-clr:            #ffffff;
+    --success-clr:         #2a9d6e;
+    --warning-clr:         #c85a10;
+    --danger-clr:          #b82020;
+}
+
+/*  SMOOTH TRANSITION on every themed element */
+*,
+*::before,
+*::after {
+    transition: var(--theme-transition);
+}
+
+/* THEME TOGGLE BUTTON */
+.sidebar-footer {
+    padding: 10px 8px;
+    border-top: 1px solid var(--line-clr);
+    margin-top: auto;
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--line-clr);
+    background: transparent;
+    color: var(--secondary-text-clr);
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 200ms;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent-clr);
+    color: var(--accent-clr);
+}
+
+.toggle-track {
+    margin-left: auto;
+    width: 34px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--line-clr);
+    position: relative;
+    flex-shrink: 0;
+    transition: background 300ms;
+}
+
+.toggle-track.on { background: var(--accent-clr); }
+
+.toggle-thumb {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #fff;
+    transition: transform 300ms;
+}
+
+.toggle-track.on .toggle-thumb { transform: translateX(16px); }
+
+
+
