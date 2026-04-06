@@ -5,7 +5,14 @@
     <title>RescueMe – Volunteer Dashboard</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+    <link rel="stylesheet" href="../css/cases.css">
+    <link rel="stylesheet" href="../css/cases_details.css">
+    <link rel="stylesheet" href="../css/volunteers.css">
+    <script src="../js/volunteers.js" defer></script>
+    <script src="../js/navbar.js" defer></script>
     <script type="text/javascript" src="../js/script.js" defer></script>
+    <script type="text/javascript" src="../js/volunteers.js" defer></script>
 </head>
 <body>
 
@@ -13,14 +20,14 @@
     <div class="sidebar">
         <nav id="sidebar">
             <ul>
-
                 <li>
-                    <span class="logo">RescueMe</span>
-                    <button onclick="toggleSidebar()" id="toggle-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
-                            <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/>
-                        </svg>
-                    </button>
+                <div class="logo-row">
+                <span class="logo">RescueMe</span>
+                 <button onclick="toggleSidebar()" id="toggle-btn">
+                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/></svg>    
+                 </button>
+                   </div>
+                   <p class="tagline">Animal Rescue Platform</p>
                 </li>
 
                 <li>
@@ -103,8 +110,7 @@
                         <span>Admin</span>
                     </a>
                 </li>
-
-             <div class="sidebar-footer">
+                <div class="sidebar-footer">
                 <button class="theme-toggle-btn" id="themeBtn">
                     <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="currentColor">
                         <path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/>
@@ -119,11 +125,73 @@
                 </button>
             </div>
 
-
             </ul>
         </nav>
     </div>
 
+    <!-- ── MAIN CONTENT AREA ── -->
+    <div class="main-wrapper">
+
+    <!-- ── NAVBAR ── -->
+    <header class="navbar">
+
+        <!-- Search -->
+        <div class="nav-search">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+            <input type="text" placeholder="Search cases, animals, volunteers…" id="navSearchInput">
+        </div>
+
+        <!-- Right cluster -->
+        <div class="nav-right">
+
+            <!-- Donate button -->
+            <a href="donate.html" class="btn-donate">
+                <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"><path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Z"/></svg>
+                Donate
+            </a>
+
+            <!-- Notifications -->
+            <a href="notifications.html" class="nav-icon-btn" id="notifBtn" aria-label="Notifications">
+                <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/></svg>
+                <span class="notif-badge" id="notifBadge">5</span>
+            </a>
+
+            <!-- Profile -->
+            <button class="nav-profile" id="profileBtn" aria-haspopup="true" aria-expanded="false">
+                <div class="avatar" id="avatarEl">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 129-46.5T480-440q68 0 135 15.5T744-378q29 15 46.5 43.5T808-272v112H160Z"/></svg>
+                </div>
+                <div class="profile-info">
+                    <span class="profile-name" id="profileName">Shahd Khaled</span>
+                    <span class="profile-role" id="profileRole">Volunteer</span>
+                </div>
+                <svg class="chevron" xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px"><path d="M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z"/></svg>
+            </button>
+
+            <!-- Profile dropdown -->
+            <div class="profile-dropdown" id="profileDropdown" role="menu" hidden>
+                <div class="dropdown-header">
+                    <div class="avatar avatar-lg" id="dropAvatarEl">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 129-46.5T480-440q68 0 135 15.5T744-378q29 15 46.5 43.5T808-272v112H160Z"/></svg>
+                    </div>
+                    <div>
+                        <p class="drop-name" id="dropName">Shahd Khaled</p>
+                        <p class="drop-role" id="dropRole">Volunteer</p>
+                    </div>
+                </div>
+                <hr class="drop-divider">
+                <a href="profile.html" class="drop-item" role="menuitem">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 129-46.5T480-440q68 0 135 15.5T744-378q29 15 46.5 43.5T808-272v112H160Z"/></svg>
+                    My Profile
+                </a>
+                <hr class="drop-divider">
+                <button class="drop-item drop-logout" id="logoutBtn" role="menuitem">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
+                    Sign out
+                </button>
+            </div>
+        </div>
+    </header>
 
     <!-- ==================== MAIN ==================== -->
     <main>
@@ -135,7 +203,6 @@
                 <p>Coordinate rescue efforts and help animals in need.</p>
             </div>
         </div>
-
 
         <!-- STAT CARDS -->
         <div class="stats-grid">
@@ -343,9 +410,15 @@
                 </div>
             </div>
 
-        </div><!-- /grid -->
+        </div>
+
+            <h1>My Accepted Cases</h1>
+            <!-- Where cases accepted by this volunteer will show up -->
+             <h3 id="no-cases-msg" style="text-align: center; color: var(--secondary-text-clr); margin-top: 50px;">You haven't accepted any cases yet. Check the Cases page!</h3>
+             <div class="cases-container" id="myCasesContainer">
+            <!-- Data will come from volunteers.js based on localStorage -->
+            </div>
 
     </main>
-
 </body>
 </html>
