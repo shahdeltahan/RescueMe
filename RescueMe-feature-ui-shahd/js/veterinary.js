@@ -46,4 +46,5 @@ function openNewAppointmentModal() {
         <span class="event-tag tag-open">Upcoming</span>`;
     taskList.appendChild(item);
     showToast('Appointment added!', 'success');
+    
 }
