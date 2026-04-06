@@ -141,3 +141,133 @@ allInputs.forEach((input) => {
         }
     });
 });
+
+/* ── report-animal.js ────────────────────────────────────────
+   Handles all interactions on the Report Animal page:
+   - Image upload + drag-and-drop preview
+   - Urgency select color change
+   - Form validation + submit
+──────────────────────────────────────────────────────────── */
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    /* ── 1. Image upload via click ── */
+    var imgInput   = document.getElementById('image-input');
+    var preview    = document.getElementById('image-preview');
+    var uploadArea = document.querySelector('.upload-area');
+
+    if (imgInput && preview) {
+        imgInput.addEventListener('change', function () {
+            var file = imgInput.files[0];
+            if (file && file.type.startsWith('image/')) {
+                showPreview(file);
+            }
+        });
+    }
+
+    /* ── 2. Drag-and-drop ── */
+    if (uploadArea) {
+        uploadArea.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            uploadArea.style.borderColor = 'var(--accent-clr)';
+            uploadArea.style.background  = 'var(--hover-clr)';
+        });
+
+        uploadArea.addEventListener('dragleave', function () {
+            uploadArea.style.borderColor = '';
+            uploadArea.style.background  = '';
+        });
+
+        uploadArea.addEventListener('drop', function (e) {
+            e.preventDefault();
+            uploadArea.style.borderColor = '';
+            uploadArea.style.background  = '';
+            var file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                showPreview(file);
+                /* Also set it on the real input so FormData picks it up */
+                var dt = new DataTransfer();
+                dt.items.add(file);
+                if (imgInput) imgInput.files = dt.files;
+            }
+        });
+    }
+
+    function showPreview(file) {
+        if (!preview) return;
+        var url = URL.createObjectURL(file);
+        preview.src = url;
+        preview.style.display = 'block';
+        /* Free old object URL when a new one is set */
+        preview.onload = function () { URL.revokeObjectURL(url); };
+    }
+
+    /* ── 3. Urgency select — colour state ── */
+    var urgencySelect = document.getElementById('urgency');
+    if (urgencySelect) {
+        urgencySelect.addEventListener('change', function () {
+            this.classList.remove('high', 'medium', 'low');
+            if (this.value) this.classList.add(this.value);
+        });
+    }
+
+    /* ── 4. Form validation + submit ── */
+    var form = document.getElementById('reportForm');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            /* Gather values */
+            var animalType = (document.getElementById('animalType')      || {}).value || '';
+            var condition  = (document.getElementById('animalCondition') || {}).value || '';
+            var urgency    = (document.getElementById('urgency')         || {}).value || '';
+            var location   = (document.getElementById('location')        || {}).value.trim();
+            var description= (document.getElementById('description')     || {}).value.trim();
+
+            /* Basic validation */
+            var errors = [];
+            if (!animalType)  errors.push('Please select an animal type.');
+            if (!condition)   errors.push('Please select the animal\'s condition.');
+            if (!urgency)     errors.push('Please select an urgency level.');
+            if (!location)    errors.push('Please enter a location.');
+            if (!description) errors.push('Please add a description.');
+
+            if (errors.length > 0) {
+                alert(errors.join('\n'));
+                return;
+            }
+
+            /* Build report object */
+            var report = {
+                id:          'RPT-' + Date.now(),
+                animalType:  animalType,
+                condition:   condition,
+                urgency:     urgency,
+                location:    location,
+                description: description,
+                reportedBy:  localStorage.getItem('rescueMe_name') || 'Anonymous',
+                timestamp:   new Date().toISOString()
+            };
+
+            /* Save to localStorage (replace with a real API call when ready) */
+            var reports = [];
+            try {
+                reports = JSON.parse(localStorage.getItem('rescueMe_reports') || '[]');
+            } catch (_) { reports = []; }
+            reports.unshift(report);
+            localStorage.setItem('rescueMe_reports', JSON.stringify(reports));
+
+            /* Feedback + redirect */
+            alert('Report submitted successfully! ID: ' + report.id);
+            form.reset();
+            if (preview) { preview.src = ''; preview.style.display = 'none'; }
+            if (urgencySelect) urgencySelect.classList.remove('high', 'medium', 'low');
+
+            /* Redirect to cases page after short delay */
+            setTimeout(function () {
+                window.location.href = '/html/cases.html';
+            }, 500);
+        });
+    }
+
+});
