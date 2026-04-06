@@ -104,7 +104,7 @@ div:has(input:focus) > label{
     background-color: var(--seconary-text-clr);
 }
 form input::placeholder{
-    color: var(--seconary-text-clr);
+    color: var(--input-color);
 }
 form button{
 margin-top: 10px;
@@ -178,6 +178,19 @@ select#role-input {
     background-position: right 12px center;
     background-size: 22px;
 }
+.details-card {
+    background: var(--input-color);
+    border: 1px solid var(--line-clr);
+    border-radius: 1em;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.details-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-clr);
+}
+
 select#role-input option{
     background-color: var(--hover-clr); 
     color: var(--text-clr);

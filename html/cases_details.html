@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notifications - RescueMe</title>
+    <title>Case Details</title>
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/cases_details.css">
     <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/navbar.css">
-    <link rel="stylesheet" href="../css/notifications.css">
     <script type="text/javascript" src="../js/navbar.js" defer></script>
     <script type="text/javascript" src="../js/script.js" defer></script>
 </head>
-<body>
 
-    <!-- ==================== SIDEBAR ==================== -->
+<body>
+   <!-- ==================== SIDEBAR ==================== -->
     <div class="sidebar">
         <nav id="sidebar">
             <ul>
@@ -45,7 +45,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="active">
                     <a href="cases.html">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
                             <path d="M180-475q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29Zm109-189q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm240 0q-29-29-29-71t29-71q29-29 71-29t71 29q29 29 29 71t-29 71q-29 29-71 29t-71-29Zm251 189q-42 0-71-29t-29-71q0-42 29-71t71-29q42 0 71 29t29 71q0 42-29 71t-71 29ZM266-75q-45 0-75.5-34.5T160-191q0-52 35.5-91t70.5-77q29-31 50-67.5t50-68.5q22-26 51-43t63-17q34 0 63 16t51 42q28 32 49.5 69t50.5 69q35 38 70.5 77t35.5 91q0 47-30.5 81.5T694-75q-54 0-107-9t-107-9q-54 0-107 9t-107 9Z"/>
@@ -54,7 +54,7 @@
                     </a>
                 </li>
 
-                <li>
+                <li >
                     <a href="volunteers.html">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
                             <path d="M640-440 474-602q-31-30-52.5-66.5T400-748q0-55 38.5-93.5T532-880q32 0 60 13.5t48 36.5q20-23 48-36.5t60-13.5q55 0 93.5 38.5T880-748q0 43-21 79.5T807-602L640-440Zm0-112 109-107q19-19 35-40.5t16-48.5q0-22-15-37t-37-15q-14 0-26.5 5.5T700-778l-60 72-60-72q-9-11-21.5-16.5T532-800q-22 0-37 15t-15 37q0 27 16 48.5t35 40.5l109 107ZM280-220l278 76 238-74q-5-9-14.5-15.5T760-240H558q-27 0-43-2t-33-8l-93-31 22-78 81 27q17 5 40 8t68 4q0-11-6.5-21T578-354l-234-86h-64v220ZM40-80v-440h304q7 0 14 1.5t13 3.5l235 87q33 12 53.5 42t20.5 66h80q50 0 85 33t35 87v40L560-60l-280-78v58H40Zm80-80h80v-280h-80v280Zm520-546Z"/>
@@ -90,7 +90,7 @@
                     </a>
                 </li>
 
-                <li class="active">
+                <li>
                     <a href="notifications.html">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
                             <path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/>
@@ -121,7 +121,6 @@
                     </div>
                 </button>
             </div>
-
             </ul>
         </nav>
     </div>
@@ -150,7 +149,7 @@
             <!-- Notifications -->
             <a href="notifications.html" class="nav-icon-btn" id="notifBtn" aria-label="Notifications">
                 <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/></svg>
-                <span class="notif-badge" id="notifBadge">3</span>
+                <span class="notif-badge" id="notifBadge">5</span>
             </a>
 
             <!-- Profile -->
@@ -181,7 +180,6 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"><path d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 129-46.5T480-440q68 0 135 15.5T744-378q29 15 46.5 43.5T808-272v112H160Z"/></svg>
                     My Profile
                 </a>
-
                 <hr class="drop-divider">
                 <button class="drop-item drop-logout" id="logoutBtn" role="menuitem">
                     <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h280v80H200Zm440-160-55-58 102-102H360v-80h327L585-622l55-58 200 200-200 200Z"/></svg>
@@ -190,211 +188,12 @@
             </div>
         </div>
     </header>
-    <!-- Main Content -->
-    <main>
-        <div class="page-header">
-            <div>
-                <h1>Notifications</h1>
-                <p>Stay updated on all rescue activities and system alerts.</p>
-            </div>
-            <button class="mark-all-btn" onclick="markAllRead()">Mark all as read</button>
-        </div>
 
-        <!-- Filter Tabs -->
-        <div class="notif-tabs">
-            <button class="tab-btn active" onclick="filterNotifs('all', this)">All <span class="tab-count">8</span></button>
-            <button class="tab-btn" onclick="filterNotifs('unread', this)">Unread <span class="tab-count">3</span></button>
-            <button class="tab-btn" onclick="filterNotifs('alert', this)">Alerts</button>
-            <button class="tab-btn" onclick="filterNotifs('update', this)">Updates</button>
-            <button class="tab-btn" onclick="filterNotifs('system', this)">System</button>
-        </div>
-
-        <!-- Notifications List -->
-        <div class="notifications-list" id="notifications-list">
-
-            <!-- Unread -->
-            <div class="notif-card unread" data-type="alert">
-                <div class="notif-icon-wrap alert-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
-                </div>
-                <div class="notif-body">
-                    <div class="notif-top">
-                        <span class="notif-title">Urgent: Injured animal needs immediate help</span>
-                        <span class="unread-dot"></span>
-                    </div>
-                    <p class="notif-desc">A severely injured dog was reported near Ring Road, Cairo. A volunteer is needed immediately.</p>
-                    <span class="notif-time">5 minutes ago</span>
-                </div>
-                <button class="notif-dismiss" onclick="dismissNotif(this)" title="Dismiss">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#b0b3c1"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                </button>
-            </div>
-
-            <div class="notif-card unread" data-type="update">
-                <div class="notif-icon-wrap update-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-                </div>
-                <div class="notif-body">
-                    <div class="notif-top">
-                        <span class="notif-title">Case #104 has been resolved</span>
-                        <span class="unread-dot"></span>
-                    </div>
-                    <p class="notif-desc">The stray cat reported in Dokki was successfully rescued and is now under veterinary care.</p>
-                    <span class="notif-time">42 minutes ago</span>
-                </div>
-                <button class="notif-dismiss" onclick="dismissNotif(this)" title="Dismiss">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#b0b3c1"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                </button>
-            </div>
-
-            <div class="notif-card unread" data-type="system">
-                <div class="notif-icon-wrap system-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"/></svg>
-                </div>
-                <div class="notif-body">
-                    <div class="notif-top">
-                        <span class="notif-title">New volunteer joined your area</span>
-                        <span class="unread-dot"></span>
-                    </div>
-                    <p class="notif-desc">Youssef Nabil has signed up as a volunteer in the Cairo region. You can assign them to open cases.</p>
-                    <span class="notif-time">2 hours ago</span>
-                </div>
-                <button class="notif-dismiss" onclick="dismissNotif(this)" title="Dismiss">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#b0b3c1"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                </button>
-            </div>
-
-            <!-- Read -->
-            <div class="notif-card" data-type="update">
-                <div class="notif-icon-wrap update-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-                </div>
-                <div class="notif-body">
-                    <div class="notif-top">
-                        <span class="notif-title">Adoption request approved</span>
-                    </div>
-                    <p class="notif-desc">The adoption request for "Luna" (ref: A-2024-089) has been reviewed and approved by the admin.</p>
-                    <span class="notif-time">Yesterday, 4:30 PM</span>
-                </div>
-                <button class="notif-dismiss" onclick="dismissNotif(this)" title="Dismiss">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#b0b3c1"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                </button>
-            </div>
-
-            <div class="notif-card" data-type="alert">
-                <div class="notif-icon-wrap alert-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M480-280q17 0 28.5-11.5T520-320q0-17-11.5-28.5T480-360q-17 0-28.5 11.5T440-320q0 17 11.5 28.5T480-280Zm-40-160h80v-240h-80v240Zm40 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/></svg>
-                </div>
-                <div class="notif-body">
-                    <div class="notif-top">
-                        <span class="notif-title">Case #98 needs a vet checkup</span>
-                    </div>
-                    <p class="notif-desc">The rescued dog from Heliopolis has been waiting for a veterinary examination for over 24 hours.</p>
-                    <span class="notif-time">Yesterday, 10:00 AM</span>
-                </div>
-                <button class="notif-dismiss" onclick="dismissNotif(this)" title="Dismiss">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#b0b3c1"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                </button>
-            </div>
-
-            <div class="notif-card" data-type="system">
-                <div class="notif-icon-wrap system-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"/></svg>
-                </div>
-                <div class="notif-body">
-                    <div class="notif-top">
-                        <span class="notif-title">Monthly donation goal reached!</span>
-                    </div>
-                    <p class="notif-desc">RescueMe has reached its monthly donation target of $10,000. Thank you to all donors!</p>
-                    <span class="notif-time">2 days ago</span>
-                </div>
-                <button class="notif-dismiss" onclick="dismissNotif(this)" title="Dismiss">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#b0b3c1"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                </button>
-            </div>
-
-            <div class="notif-card" data-type="update">
-                <div class="notif-icon-wrap update-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-                </div>
-                <div class="notif-body">
-                    <div class="notif-top">
-                        <span class="notif-title">Volunteer assignment confirmed</span>
-                    </div>
-                    <p class="notif-desc">Sara Mohamed has been assigned to Case #112 in Giza. Expected response within 2 hours.</p>
-                    <span class="notif-time">3 days ago</span>
-                </div>
-                <button class="notif-dismiss" onclick="dismissNotif(this)" title="Dismiss">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#b0b3c1"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                </button>
-            </div>
-
-            <div class="notif-card" data-type="system">
-                <div class="notif-icon-wrap system-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#e3e3e3"><path d="M480-80q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Zm0-84q104-33 172-132t68-220v-189l-240-90-240 90v189q0 121 68 220t172 132Zm0-316Z"/></svg>
-                </div>
-                <div class="notif-body">
-                    <div class="notif-top">
-                        <span class="notif-title">System maintenance scheduled</span>
-                    </div>
-                    <p class="notif-desc">RescueMe will undergo maintenance on Saturday, March 28 from 2:00 AM – 4:00 AM. Expect brief downtime.</p>
-                    <span class="notif-time">4 days ago</span>
-                </div>
-                <button class="notif-dismiss" onclick="dismissNotif(this)" title="Dismiss">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#b0b3c1"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-                </button>
-            </div>
-
-        </div>
-
-        <!-- Empty State (hidden by default) -->
-        <div class="empty-state" id="empty-state" style="display:none;">
-            <svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px" fill="#42434a"><path d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z"/></svg>
-            <p>No notifications here</p>
-        </div>
-
+    <main class="details-container" id="detailsContainer">
+        <!-- data will come from JS -->
     </main>
 
-    <script>
-        function markAllRead() {
-            document.querySelectorAll('.notif-card.unread').forEach(card => {
-                card.classList.remove('unread');
-                const dot = card.querySelector('.unread-dot');
-                if (dot) dot.remove();
-            });
-            document.querySelectorAll('.tab-count').forEach(el => el.textContent = '0');
-        }
-
-        function dismissNotif(btn) {
-            const card = btn.closest('.notif-card');
-            card.style.opacity = '0';
-            card.style.transform = 'translateX(30px)';
-            setTimeout(() => {
-                card.remove();
-                checkEmpty();
-            }, 300);
-        }
-
-        function filterNotifs(type, btn) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.querySelectorAll('.notif-card').forEach(card => {
-                if (type === 'all') {
-                    card.style.display = 'flex';
-                } else if (type === 'unread') {
-                    card.style.display = card.classList.contains('unread') ? 'flex' : 'none';
-                } else {
-                    card.style.display = card.dataset.type === type ? 'flex' : 'none';
-                }
-            });
-            checkEmpty();
-        }
-
-        function checkEmpty() {
-            const visible = [...document.querySelectorAll('.notif-card')].filter(c => c.style.display !== 'none');
-            document.getElementById('empty-state').style.display = visible.length === 0 ? 'flex' : 'none';
-        }
-    </script>
-
+    <script src="../js/cases_details.js"></script>
 </body>
+
 </html>
