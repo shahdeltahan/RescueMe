@@ -1,0 +1,196 @@
+
+
+
+body {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    min-height: 100vh;
+}
+
+/* main-wrapper stacks navbar above content */
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── Page content area ──────────────────────────────────── */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 32px 24px 48px;
+    overflow-y: auto;
+}
+
+/* ════════════════════════════════════════════════════════════
+   FORM CONTAINER
+════════════════════════════════════════════════════════════ */
+.container {
+    width: 100%;
+    max-width: 740px;
+    background: var(--card-clr);
+    border: 1px solid var(--line-clr);
+    border-radius: 1em;
+    padding: 32px 36px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, .25);
+}
+
+.container h2 {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-clr);
+}
+
+/* ════════════════════════════════════════════════════════════
+   UPLOAD BOX
+════════════════════════════════════════════════════════════ */
+.upload-box {
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.upload-area {
+    border: 2px dashed var(--line-clr);
+    padding: 32px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 200ms, border-color 200ms;
+    color: var(--secondary-text-clr);
+    user-select: none;
+}
+
+.upload-area:hover {
+    background: var(--hover-clr);
+    border-color: var(--accent-clr);
+}
+
+.upload-area svg {
+    fill: var(--secondary-text-clr);
+    margin-bottom: 8px;
+}
+
+.upload-area p {
+    margin: 8px 0 4px;
+    font-weight: 600;
+    color: var(--text-clr);
+    font-size: .95rem;
+}
+
+.upload-area span {
+    font-size: .78rem;
+    color: var(--secondary-text-clr);
+}
+
+#image-preview {
+    margin-top: 12px;
+    width: 130px;
+    display: none;
+    border-radius: 8px;
+    border: 1px solid var(--line-clr);
+    object-fit: cover;
+}
+
+/* ════════════════════════════════════════════════════════════
+   FORM GRID + INPUT GROUPS
+════════════════════════════════════════════════════════════ */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 4px;
+}
+
+.input-group {
+    margin-bottom: 16px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--text-clr);
+}
+
+/* ════════════════════════════════════════════════════════════
+   INPUTS / SELECTS / TEXTAREA
+════════════════════════════════════════════════════════════ */
+.container input[type="text"],
+.container select,
+.container textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background: var(--base-clr);
+    border: 1px solid var(--line-clr);
+    border-radius: 8px;
+    color: var(--text-clr);
+    font-size: .875rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 200ms, box-shadow 200ms;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.container input[type="text"]:focus,
+.container select:focus,
+.container textarea:focus {
+    border-color: var(--accent-clr);
+    box-shadow: 0 0 0 3px rgba(94, 99, 255, .12);
+}
+
+.container input[type="text"]::placeholder {
+    color: var(--secondary-text-clr);
+}
+
+.container select {
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23b0b3c1' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 18px;
+    padding-right: 36px;
+}
+
+.container select option {
+    background: var(--base-clr);
+    color: var(--text-clr);
+}
+
+.container textarea {
+    height: 110px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ════════════════════════════════════════════════════════════
+   URGENCY COLOR STATES
+════════════════════════════════════════════════════════════ */
+#urgency.high   { border-color: #ef4444; color: #ef4444; }
+#urgency.medium { border-color: #f59e0b; color: #f59e0b; }
+#urgency.low    { border-color: #22c55e; color: #22c55e; }
+
+/* ════════════════════════════════════════════════════════════
+   SUBMIT BUTTON
+════════════════════════════════════════════════════════════ */
+.container button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: var(--accent-clr);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: .95rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity 200ms, transform 150ms;
+    margin-top: 4px;
+}
+
+.container button[type="submit"]:hover  { opacity: .88; transform: translateY(-1px); }
+.container button[type="submit"]:active { transform: translateY(0); }

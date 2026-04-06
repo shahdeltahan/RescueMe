@@ -1,0 +1,198 @@
+/* ===== NOTIFICATIONS CSS ===== */
+
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.page-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-clr);
+}
+.page-header p {
+    color: var(--secondary-text-clr);
+    margin-top: 4px;
+    margin-bottom: 0;
+}
+.mark-all-btn {
+    flex-shrink: 0;
+    padding: 8px 18px;
+    border: 1px solid var(--line-clr);
+    border-radius: 20px;
+    background: none;
+    color: var(--secondary-text-clr);
+    font: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: border-color 150ms, color 150ms;
+}
+.mark-all-btn:hover {
+    border-color: var(--accent-clr);
+    color: var(--accent-clr);
+}
+
+/* Filter Tabs */
+.notif-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.tab-btn {
+    padding: 7px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--line-clr);
+    background: none;
+    color: var(--secondary-text-clr);
+    font: inherit;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 150ms;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.tab-btn:hover {
+    border-color: var(--accent-clr);
+    color: var(--accent-clr);
+}
+.tab-btn.active {
+    background-color: var(--accent-clr);
+    border-color: var(--accent-clr);
+    color: #fff;
+}
+.tab-count {
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 1px 7px;
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+.tab-btn:not(.active) .tab-count {
+    background: var(--hover-clr);
+    color: var(--secondary-text-clr);
+}
+
+/* Notification Cards */
+.notifications-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.notif-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+     background: var(--card-clr);
+    border: 1px solid var(--line-clr);
+    border-radius: 12px;
+    padding: 16px;
+    transition: border-color 200ms, opacity 300ms, transform 300ms;
+    position: relative;
+}
+.notif-card:hover {
+    border-color: var(--accent-clr);
+}
+.notif-card.unread {
+    border-left: 3px solid var(--accent-clr);
+}
+
+/* Icon Wraps */
+.notif-icon-wrap {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.alert-icon  { background-color: rgba(255, 77, 77, 0.15); }
+.alert-icon svg  { fill: #ff6b6b !important; }
+.update-icon { background-color: rgba(40, 200, 140, 0.15); }
+.update-icon svg { fill: #28c88c !important; }
+.system-icon { background-color: rgba(94, 99, 255, 0.15); }
+.system-icon svg { fill: var(--accent-clr) !important; }
+
+/* Notif Body */
+.notif-body {
+    flex: 1;
+    min-width: 0;
+}
+.notif-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+.notif-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-clr);
+}
+.unread-dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-clr);
+}
+.notif-desc {
+    font-size: 0.82rem;
+    color: var(--secondary-text-clr);
+    line-height: 1.5;
+    margin-bottom: 6px !important;
+    margin-top: 0 !important;
+}
+.notif-time {
+    font-size: 0.74rem;
+    color: var(--secondary-text-clr);
+    opacity: 0.7;
+}
+
+/* Dismiss Button */
+.notif-dismiss {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 150ms, background 150ms;
+}
+.notif-card:hover .notif-dismiss {
+    opacity: 1;
+}
+.notif-dismiss:hover {
+    background-color: var(--line-clr);
+}
+
+/* Empty State */
+.empty-state {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 60px 20px;
+    color: var(--secondary-text-clr);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+    .notif-card {
+        flex-wrap: wrap;
+    }
+    .page-header {
+        flex-direction: column;
+    }
+}

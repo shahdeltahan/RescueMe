@@ -1,0 +1,270 @@
+/* donate.css */
+
+@import url('style.css');
+@import url('volunteers.css');
+
+
+/* ─── DONATION PAGE ─────────────────────────────────────────── */
+.donate-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--line-clr);
+    background: var(--base-clr);
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--text-clr);
+    cursor: pointer;
+    transition: border-color 150ms, background 150ms, color 150ms;
+}
+
+.donate-btn.active {
+    border: 2px solid var(--accent-clr);
+    background: rgba(94, 99, 255, .12);
+    color: var(--accent-clr);
+}
+
+.cause-btn {
+    flex: 1;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--line-clr);
+    background: var(--base-clr);
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text-clr);
+    cursor: pointer;
+    transition: border-color 150ms, background 150ms, color 150ms;
+}
+
+.cause-btn.active {
+    border: 2px solid var(--accent-clr);
+    background: rgba(94, 99, 255, .12);
+    color: var(--accent-clr);
+}
+
+.amount-input-wrap {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--line-clr);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.amount-input-prefix {
+    padding: 10px 12px;
+    background: var(--hover-clr);
+    color: var(--secondary-text-clr);
+    font-weight: 700;
+    border-right: 1px solid var(--line-clr);
+}
+
+.amount-input-field {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: .88rem;
+    color: var(--text-clr);
+    background: var(--input-color);
+}
+
+.donate-now-btn {
+    width: 100%;
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+    background: var(--accent-clr);
+    color: #fff;
+    font-size: .92rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: .02em;
+    transition: opacity 150ms;
+}
+
+.donate-now-btn:hover { opacity: .85; }
+
+.amount-btns-row,
+.cause-btns-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.campaign-card {
+    border: 1px solid var(--line-clr);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: var(--base-clr);
+    transition: border-color 150ms;
+}
+
+.campaign-card:last-child { margin-bottom: 0; }
+.campaign-card:hover      { border-color: var(--accent-clr); }
+
+.campaign-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.campaign-card-title  { font-size: .88rem; font-weight: 700; color: var(--text-clr); }
+.campaign-card-desc   { font-size: .76rem; color: var(--secondary-text-clr); margin-bottom: 8px; }
+
+.campaign-card-amounts {
+    display: flex;
+    justify-content: space-between;
+    font-size: .75rem;
+    color: var(--secondary-text-clr);
+    margin-bottom: 4px;
+}
+
+.campaign-card-amounts strong { color: var(--text-clr); }
+
+.donation-summary {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.donation-summary-card {
+    flex: 1;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+}
+
+.donation-summary-card.blue  { background: rgba(94, 99, 255, .12); }
+.donation-summary-card.green { background: rgba(76, 175, 130, .12); }
+
+.donation-summary-val       { font-size: 1.4rem; font-weight: 700; }
+.donation-summary-val.blue  { color: var(--accent-clr); }
+.donation-summary-val.green { color: var(--success-clr); }
+.donation-summary-label     { font-size: .72rem; color: var(--secondary-text-clr); }
+
+.transparency-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.transparency-stat {
+    background: var(--base-clr);
+    border: 1px solid var(--line-clr);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+}
+
+.transparency-stat-val       { font-size: 1.1rem; font-weight: 700; color: var(--text-clr); }
+.transparency-stat-val.green { color: var(--success-clr); }
+.transparency-stat-val.blue  { color: var(--accent-clr); }
+.transparency-stat-label     { font-size: .7rem; color: var(--secondary-text-clr); }
+
+.progress-label-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: .78rem;
+    margin-bottom: 4px;
+}
+
+.progress-label-row span { color: var(--text-clr); font-weight: 600; }
+.donation-amount         { font-size: .85rem; font-weight: 700; color: var(--accent-clr); }
+
+/* ─── BAR CHART ─────────────────────────────────────────────── */
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    height: 100px;
+    margin-top: 1em;
+}
+
+.bar-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.bar {
+    width: 100%;
+    border-radius: 4px 4px 0 0;
+    background: var(--accent-clr);
+    opacity: .7;
+    transition: opacity 150ms, transform 150ms;
+    min-height: 4px;
+}
+
+.bar:hover {
+    opacity: 1;
+    transform: scaleY(1.03);
+    transform-origin: bottom;
+}
+
+.bar.highlight { opacity: 1; }
+.bar-label     { font-size: .68rem; color: var(--secondary-text-clr); }
+
+/* ─── PROFILE CARD ──────────────────────────────────────────── */
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    padding-bottom: .5em;
+}
+
+.profile-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-clr), #8a5cf6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 700;
+    border: 3px solid var(--line-clr);
+}
+
+.profile-name { font-size: 1.1rem; font-weight: 700; }
+
+.profile-role {
+    font-size: .78rem;
+    font-weight: 600;
+    background: rgba(94, 99, 255, .15);
+    color: var(--accent-clr);
+    border-radius: 999px;
+    padding: 2px 12px;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 0;
+    width: 100%;
+    border: 1px solid var(--line-clr);
+    border-radius: .6em;
+    overflow: hidden;
+    margin-top: .5em;
+}
+
+.profile-stat {
+    flex: 1;
+    padding: .6em;
+    border-right: 1px solid var(--line-clr);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.profile-stat:last-child { border-right: none; }
+.profile-stat-val        { font-size: 1rem; font-weight: 700; }
+.profile-stat-label      { font-size: .65rem; color: var(--secondary-text-clr); text-transform: uppercase; letter-spacing: .05em; }
