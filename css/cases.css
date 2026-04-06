@@ -1,0 +1,134 @@
+body {
+    background-color: var(--base-clr);
+    color: var(--text-clr);
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-clr);
+    margin-bottom: 30px;
+}
+
+.cases-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.card {
+    background-color: var(--input-color);
+    border: 1px solid var(--line-clr);
+    border-radius: 1em;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-clr);
+}
+
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 20px;
+}
+
+.card-content h3 {
+    color: var(--text-clr);
+    margin-bottom: 15px;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-transform: capitalize;
+}
+
+/* Status colors adjusted for dark theme */
+.injured {
+    background: rgba(255, 165, 0, 0.15);
+    color: #ffa502;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+.sick {
+    background: rgba(156, 136, 255, 0.15);
+    color: #9c88ff;
+    border: 1px solid rgba(156, 136, 255, 0.3);
+}
+
+.abused {
+    background: rgba(113, 128, 147, 0.15);
+    color: #718093;
+    border: 1px solid rgba(113, 128, 147, 0.3);
+}
+
+.malnourished {
+    background: rgba(225, 177, 44, 0.15);
+    color: #e1b12c;
+    border: 1px solid rgba(225, 177, 44, 0.3);
+}
+
+.trapped {
+    background: rgba(232, 65, 24, 0.15);
+    color: #e84118;
+    border: 1px solid rgba(232, 65, 24, 0.3);
+}
+
+/* Progress Statuses */
+.in-progress {
+    background: rgba(0, 168, 255, 0.15);
+    color: #00a8ff;
+    border: 1px solid rgba(0, 168, 255, 0.3);
+}
+
+.in-treatment {
+    background: rgba(23, 162, 184, 0.15);
+    color: #17a2b8;
+    border: 1px solid rgba(23, 162, 184, 0.3);
+}
+
+.stable {
+    background: rgba(46, 213, 115, 0.15);
+    color: #2ed573;
+    border: 1px solid rgba(46, 213, 115, 0.3);
+}
+
+.closed {
+    background: rgba(108, 117, 125, 0.15);
+    color: #6c757d;
+    border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.card-content button {
+    padding: 0.85em;
+    width: 100%;
+    border: none;
+    border-radius: 1000px;
+    background-color: var(--accent-clr);
+    color: var(--base-clr);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 150ms ease;
+}
+
+.card-content button:hover {
+    background-color: var(--text-clr);
+}
+
+.card-content button:active {
+    outline: none;
+    background-color: var(--secondary-text-clr);
+    transform: scale(0.98);
+}

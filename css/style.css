@@ -13,6 +13,22 @@
     padding:0;
 }
 
+/* Global Form Element Styles */
+input, textarea, select {
+    background-color: var(--input-color);
+    color: var(--text-clr);
+    border: 1px solid var(--line-clr);
+    font-family: inherit;
+    padding: 8px;
+    border-radius: 0.5em;
+    outline: none;
+}
+
+select option {
+    background-color: var(--input-color);
+    color: var(--text-clr);
+}
+
 /* main content */
 main{
     padding:min(30px,7%);
