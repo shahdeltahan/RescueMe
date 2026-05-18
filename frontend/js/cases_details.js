@@ -67,7 +67,7 @@ function renderCaseDetails(animal) {
 
   const userRole = (localStorage.getItem("rescueMe_role") || "").toLowerCase();
   const canAccept = userRole === "admin" || userRole === "volunteer";
-  const alreadyAccepted = status === "in_progress";
+  const alreadyAccepted = animal.volunteer_status !== null && animal.volunteer_status !== undefined;
 
   container.innerHTML = `
     <button class="back-btn" onclick="window.location.href='cases.html'">
