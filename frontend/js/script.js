@@ -372,57 +372,96 @@ function updateThemeUI(isLight) {
         themeBtn.setAttribute('aria-pressed', String(isLight));
     }
 }
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     var activityList = document.getElementById("activity-list");
     if (activityList) {
-        var reportsRaw = JSON.parse(localStorage.getItem('rescueMe_reports') || '[]');
-        var reports = reportsRaw.filter(r => r && r.approved !== false);
+        const token = localStorage.getItem('rescueMe_token');
+        
+        let reports = [];
+        try {
+            const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/cases", {
+                headers: { "Authorization": "Bearer " + token }
+            });
+            if (res.ok) reports = await res.json();
+        } catch (e) { console.error("Failed to fetch cases", e); }
+        
         var totalCasesEl = document.getElementById('total-cases');
-        if (totalCasesEl) {
-            totalCasesEl.textContent = reports.length;
-        }
-        const patients = JSON.parse(localStorage.getItem('rescueMe_patients') || '[]');
-        const stablePatients = patients.filter(p => p.status === 'Stable');
+        if (totalCasesEl) totalCasesEl.textContent = reports.length;
+        
+        const rescuedCount = reports.filter(r => r.status_name === 'Closed' || r.status_name === 'closed' || r.status_name === 'Stable').length;
         const rescuedEl = document.getElementById('rescued-animals');
-        if (rescuedEl) rescuedEl.textContent = stablePatients.length;
-        const users = JSON.parse(localStorage.getItem('rescueMe_users') || '[]');
-        const volunteerCount = users.filter(u => u.role === "Volunteer").length;
+        if (rescuedEl) rescuedEl.textContent = rescuedCount;
+        
+        let volunteerCount = 0;
+        try {
+            const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/admin/users", {
+                headers: { "Authorization": "Bearer " + token }
+            });
+            if (res.ok) {
+                const users = await res.json();
+                volunteerCount = users.filter(u => (u.role_name || u.role) === "volunteer").length;
+            } else {
+                const users = JSON.parse(localStorage.getItem('rescueMe_users') || '[]');
+                volunteerCount = users.filter(u => u.role === "Volunteer" || u.role_name === "volunteer").length;
+            }
+        } catch (e) { console.error(e); }
         const volunteersEl = document.getElementById('total-volunteers');
         if (volunteersEl) volunteersEl.textContent = volunteerCount;
-        const donations = JSON.parse(localStorage.getItem('rescueMe_donations') || '[]');
-        const totalDonations = donations.reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
+
+        let totalDonations = 0;
+        try {
+            const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/payments", {
+                headers: { "Authorization": "Bearer " + token }
+            });
+            if (res.ok) {
+                const payments = await res.json();
+                totalDonations = payments.reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
+            } else {
+                const donations = JSON.parse(localStorage.getItem('rescueMe_donations') || '[]');
+                totalDonations = donations.reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
+            }
+        } catch (e) { console.error(e); }
+        
         const donationsEl = document.getElementById('total-donations');
         if (donationsEl) {
             donationsEl.textContent = '$' + totalDonations.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
         }
+        
         const dashboardNotifBadge = document.getElementById('notif-badge');
         if (dashboardNotifBadge) {
-            const unreadCount = reports.length || (patients.length === 0 && donations.length === 0 ? 1 : 0);
+            const unreadCount = reports.filter(r => r.status_name === 'Open' || r.status_name === 'open').length;
             dashboardNotifBadge.textContent = unreadCount;
             dashboardNotifBadge.parentElement.style.display = unreadCount > 0 ? 'flex' : 'none';
         }
+        
         activityList.innerHTML = '';
         if (reports.length === 0) {
             activityList.innerHTML = '<p style="padding: 20px; color: var(--secondary-text-clr);">No recent reports available. Add some via Report Animal!</p>';
             return;
         }
-        var latestReports = reports.slice().reverse().slice(0, 5);
+        
+        var latestReports = reports.slice(0, 5);
         latestReports.forEach(function (report) {
             var urgencyClass = "low";
             var badgeClass = "low-badge";
             var urgencyText = "Low";
-            if (report.urgency === 'high') {
-                urgencyClass = "urgent";
-                badgeClass = "urgent-badge";
-                urgencyText = "Urgent";
-            } else if (report.urgency === 'medium') {
-                urgencyClass = "medium";
-                badgeClass = "medium-badge";
-                urgencyText = "Moderate";
+            
+            if (report.urgency_level) {
+                const u = report.urgency_level.toLowerCase();
+                if (u === 'high' || u === 'critical') {
+                    urgencyClass = "urgent";
+                    badgeClass = "urgent-badge";
+                    urgencyText = "Urgent";
+                } else if (u === 'medium') {
+                    urgencyClass = "medium";
+                    badgeClass = "medium-badge";
+                    urgencyText = "Moderate";
+                }
             }
+            
             var timeAgo = "Just now";
-            if (report.timestamp) {
-                var diffMin = Math.round((new Date() - new Date(report.timestamp)) / 60000);
+            if (report.created_at) {
+                var diffMin = Math.round((new Date() - new Date(report.created_at)) / 60000);
                 if (diffMin > 60 && diffMin < 1440) {
                     timeAgo = Math.round(diffMin / 60) + " hrs ago";
                 } else if (diffMin >= 1440) {
@@ -436,12 +475,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="activity-status ${urgencyClass}"></div>
                     <div class="activity-content">
                         <div class="activity-top">
-                            <span class="activity-title">${report.animalType || 'Animal'} (${report.condition || 'Unknown'})</span>
+                            <span class="activity-title">${report.animal_type || 'Animal'} (${report.animal_condition || 'Unknown'})</span>
                             <span class="activity-badge ${badgeClass}">${urgencyText}</span>
                         </div>
-                        <p class="activity-meta">Reported by ${report.reportedBy || 'Anonymous'} &bull; ${report.location || 'Unknown location'} &bull; ${timeAgo}</p>
+                        <p class="activity-meta">Reported by ${report.reported_by || 'Anonymous'} &bull; ${report.location || 'Unknown location'} &bull; ${timeAgo}</p>
                     </div>
-                    <a href="cases_details.html?id=${report.id}" class="activity-arrow">
+                    <a href="cases_details.html?id=${report.report_id}" class="activity-arrow">
                         <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#b0b3c1"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
                     </a>
                 </div>

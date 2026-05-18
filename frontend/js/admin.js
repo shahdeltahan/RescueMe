@@ -3,14 +3,30 @@ function initAdmin() {
     initUserManagement();
 }
 async function loadAdminData() {
-    let donations = JSON.parse(localStorage.getItem('rescueMe_donations') || '[]');
-    let totalDonations = donations.reduce((sum, d) => sum + d.amount, 0);
+    let totalDonations = 0;
+    try {
+        const token = localStorage.getItem('rescueMe_token');
+        const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/payments", {
+            headers: { "Authorization": "Bearer " + token }
+        });
+        if (res.ok) {
+            const payments = await res.json();
+            totalDonations = payments.reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
+        } else {
+            const donations = JSON.parse(localStorage.getItem('rescueMe_donations') || '[]');
+            totalDonations = donations.reduce((sum, d) => sum + (parseFloat(d.amount) || 0), 0);
+        }
+    } catch(e) {
+        console.error("Failed to load donations", e);
+    }
+    
     const statDonations = document.getElementById('statDonations');
     const progDonations = document.getElementById('progDonations');
     if (statDonations) {
         statDonations.textContent = `$${totalDonations > 1000 ? (totalDonations/1000).toFixed(1) + 'K' : totalDonations.toFixed(2)}`;
         progDonations.style.width = `${Math.min(100, (totalDonations / 5000) * 100)}%`;
     }
+    
     let reports = [];
     try {
         const token = localStorage.getItem('rescueMe_token');
