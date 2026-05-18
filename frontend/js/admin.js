@@ -6,7 +6,7 @@ async function loadAdminData() {
     let totalDonations = 0;
     try {
         const token = localStorage.getItem('rescueMe_token');
-        const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/payments", {
+        const res = await fetch(API_BASE_URL + "/api/payments", {
             headers: { "Authorization": "Bearer " + token }
         });
         if (res.ok) {
@@ -30,7 +30,7 @@ async function loadAdminData() {
     let reports = [];
     try {
         const token = localStorage.getItem('rescueMe_token');
-        const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/cases", {
+        const res = await fetch(API_BASE_URL + "/api/cases", {
             headers: { "Authorization": "Bearer " + token }
         });
         if (res.ok) {
@@ -96,7 +96,7 @@ async function loadAdminData() {
 
     try {
         const token = localStorage.getItem('rescueMe_token');
-        const response = await fetch("https://rescueme-backend-jjhr.onrender.com/api/admin/users", {
+        const response = await fetch(API_BASE_URL + "/api/admin/users", {
             headers: {
                 "Authorization": "Bearer " + token
             }
@@ -183,7 +183,7 @@ async function loadAdminData() {
 
         try {
             const token = localStorage.getItem('rescueMe_token');
-            const reqResponse = await fetch("https://rescueme-backend-jjhr.onrender.com/api/requests", {
+            const reqResponse = await fetch(API_BASE_URL + "/api/requests", {
                 headers: {
                     "Authorization": "Bearer " + token
                 }
@@ -259,7 +259,7 @@ async function handleApproval(btn, approved) {
         try {
             const status = approved ? 'approved' : 'rejected';
             const token = localStorage.getItem('rescueMe_token');
-            const response = await fetch(`https://rescueme-backend-jjhr.onrender.com/api/requests/${itemId}/status`, {
+            const response = await fetch(`${API_BASE_URL}/api/requests/${itemId}/status`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -309,7 +309,7 @@ async function handleApproval(btn, approved) {
             } else {
                 try {
                     const token = localStorage.getItem('rescueMe_token');
-                    const res = await fetch(`https://rescueme-backend-jjhr.onrender.com/api/cases/${itemId}/status`, {
+                    const res = await fetch(`${API_BASE_URL}/api/cases/${itemId}/status`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -352,7 +352,7 @@ async function confirmApproveCase() {
     
     try {
         const token = localStorage.getItem('rescueMe_token');
-        const res = await fetch(`https://rescueme-backend-jjhr.onrender.com/api/cases/${itemId}/status`, {
+        const res = await fetch(`${API_BASE_URL}/api/cases/${itemId}/status`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -395,7 +395,7 @@ async function deleteUser(userId) {
 
     try {
         const token = localStorage.getItem('rescueMe_token');
-        const statusRes = await fetch(`https://rescueme-backend-jjhr.onrender.com/api/admin/users/${userId}/status`, {
+        const statusRes = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/status`, {
             method: 'PUT',
             headers: { 
                 'Content-Type': 'application/json',
@@ -451,7 +451,7 @@ async function saveEditedUser() {
 
     try {
         const token = localStorage.getItem('rescueMe_token');
-        const roleRes = await fetch(`https://rescueme-backend-jjhr.onrender.com/api/admin/users/${userId}/role`, {
+        const roleRes = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/role`, {
             method: 'PUT',
             headers: { 
                 'Content-Type': 'application/json',
@@ -464,7 +464,7 @@ async function saveEditedUser() {
         let errorMsg = '';
 
         if (newStatus) {
-            const statusRes = await fetch(`https://rescueme-backend-jjhr.onrender.com/api/admin/users/${userId}/status`, {
+            const statusRes = await fetch(`${API_BASE_URL}/api/admin/users/${userId}/status`, {
                 method: 'PUT',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -594,7 +594,7 @@ async function createNewUser() {
     const token = localStorage.getItem('rescueMe_token');
 
     try {
-        const response = await fetch("https://rescueme-backend-jjhr.onrender.com/api/admin/users", {
+        const response = await fetch(API_BASE_URL + "/api/admin/users", {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",

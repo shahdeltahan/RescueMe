@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Load from database if token exists
     const token = localStorage.getItem("rescueMe_token");
     if (token) {
-        fetch("https://rescueme-backend-jjhr.onrender.com/api/auth/profile", {
+        fetch(API_BASE_URL + "/api/auth/profile", {
             headers: { "Authorization": `Bearer ${token}` }
         })
         .then(res => {
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function () {
         try {
             saveBtn.disabled = true;
             saveBtn.style.opacity = '0.7';
-            const response = await fetch("https://rescueme-backend-jjhr.onrender.com/api/auth/profile", {
+            const response = await fetch(API_BASE_URL + "/api/auth/profile", {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const token = localStorage.getItem("rescueMe_token");
                 if (token) {
                     try {
-                        const response = await fetch("https://rescueme-backend-jjhr.onrender.com/api/auth/delete", {
+                        const response = await fetch(API_BASE_URL + "/api/auth/delete", {
                             method: "DELETE",
                             headers: {
                                 "Authorization": `Bearer ${token}`
@@ -294,7 +294,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     description: reason
                 };
 
-                const response = await fetch("https://rescueme-backend-jjhr.onrender.com/api/requests", {
+                const response = await fetch(API_BASE_URL + "/api/requests", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)

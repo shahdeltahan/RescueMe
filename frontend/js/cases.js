@@ -3,7 +3,7 @@ const container = document.getElementById("casesContainer");
 async function loadCases() {
     try {
         const token = localStorage.getItem('rescueMe_token');
-        const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/cases", {
+        const res = await fetch(API_BASE_URL + "/api/cases", {
             headers: { "Authorization": "Bearer " + token }
         });
         if (res.ok) {

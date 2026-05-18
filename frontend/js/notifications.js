@@ -1,4 +1,4 @@
-const API_BASE = "https://rescueme-backend-jjhr.onrender.com/api";
+const API_BASE = API_BASE_URL + "/api";
 function getToken() {
     return localStorage.getItem("rescueMe_token") || localStorage.getItem("token");
 }

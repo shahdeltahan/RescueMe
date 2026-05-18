@@ -55,7 +55,7 @@ async function updateNotificationBadge() {
     }
 
     try {
-        const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/notifications", {
+        const res = await fetch(API_BASE_URL + "/api/notifications", {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         if (!res.ok) return;

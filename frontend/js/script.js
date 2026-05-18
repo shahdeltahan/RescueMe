@@ -1,3 +1,4 @@
+const API_BASE_URL = "https://rescueme-backend-jjhr.onrender.com";
 const toggleButton = document.getElementById("toggle-btn");
 const sidebar = document.getElementById("sidebar");
 function toggleSidebar() {
@@ -60,7 +61,7 @@ if (form) {
         if (fullname_input) {
             try {
                 console.log("Sending role:", role_input.value);
-                const response = await fetch("https://rescueme-backend-jjhr.onrender.com/api/auth/signup", {
+                const response = await fetch(API_BASE_URL + "/api/auth/signup", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -91,7 +92,7 @@ if (form) {
             }
         } else {
             try {
-                const response = await fetch("https://rescueme-backend-jjhr.onrender.com/api/auth/login", {
+                const response = await fetch(API_BASE_URL + "/api/auth/login", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -114,7 +115,7 @@ if (form) {
                     showToast("Login successful!", "success");
 
                     setTimeout(() => {
-                        window.location.href = "sidebar.html";
+                        let redirectPage = "sidebar.html"; const userRole = data.user.role.toLowerCase(); if (userRole === "admin") redirectPage = "admin.html"; else if (userRole === "volunteer") redirectPage = "volunteers.html"; else if (userRole === "vet" || userRole === "veterinarian") redirectPage = "veterinary.html"; else if (userRole === "adopter") redirectPage = "adoption.html"; window.location.href = redirectPage;
                     }, 800);
                 } else {
                     error_message.textContent = data.error || "Login failed";
@@ -146,7 +147,7 @@ if (form) {
                             try {
                                 unlockBtn.disabled = true;
                                 unlockBtn.textContent = "Sending Request...";
-                                const reqRes = await fetch("https://rescueme-backend-jjhr.onrender.com/api/requests", {
+                                const reqRes = await fetch(API_BASE_URL + "/api/requests", {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify({
@@ -379,7 +380,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         
         let reports = [];
         try {
-            const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/cases", {
+            const res = await fetch(API_BASE_URL + "/api/cases", {
                 headers: { "Authorization": "Bearer " + token }
             });
             if (res.ok) reports = await res.json();
@@ -394,7 +395,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         
         let volunteerCount = 0;
         try {
-            const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/admin/users", {
+            const res = await fetch(API_BASE_URL + "/api/admin/users", {
                 headers: { "Authorization": "Bearer " + token }
             });
             if (res.ok) {
@@ -410,7 +411,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
         let totalDonations = 0;
         try {
-            const res = await fetch("https://rescueme-backend-jjhr.onrender.com/api/payments", {
+            const res = await fetch(API_BASE_URL + "/api/payments", {
                 headers: { "Authorization": "Bearer " + token }
             });
             if (res.ok) {

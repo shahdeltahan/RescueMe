@@ -1,6 +1,6 @@
 let activeCause = "Medical Care";
 
-const API_BASE = "https://rescueme-backend-jjhr.onrender.com/api";
+const API_BASE = API_BASE_URL + "/api";
 
 const campaignMap = {
   "Medical Care": 1,
