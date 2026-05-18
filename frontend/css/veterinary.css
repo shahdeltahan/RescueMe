@@ -1,0 +1,39 @@
+@import url('style.css');
+@import url('volunteers.css');
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.modal-overlay.show {
+    opacity: 1;
+}
+.modal-content {
+    background: var(--base-clr);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 400px;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    border: 1px solid var(--line-clr);
+}
+.modal-overlay.show .modal-content {
+    transform: translateY(0);
+}
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-clr);
+}
