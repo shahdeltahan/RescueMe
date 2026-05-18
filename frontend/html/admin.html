@@ -231,6 +231,25 @@
     <div class="table-rows" id="userManagementRows">
     </div>
 </div>
+<div class="panel" style="margin-bottom:16px; overflow-x: auto;">
+    <div class="panel-header">
+        <span class="panel-title">🐾 Submitted Animal Reports</span>
+    </div>
+    <div class="table-header" style="grid-template-columns: 0.5fr 1fr 1fr 1.5fr 0.8fr 1fr 1.2fr 1fr; min-width: 800px;">
+        <span class="table-header-cell">ID</span>
+        <span class="table-header-cell">Animal</span>
+        <span class="table-header-cell">Condition</span>
+        <span class="table-header-cell">Description</span>
+        <span class="table-header-cell">Urgency</span>
+        <span class="table-header-cell">Status</span>
+        <span class="table-header-cell">Reporter Info</span>
+        <span class="table-header-cell">Date</span>
+    </div>
+    <div class="table-rows" id="reportsContainer" style="min-width: 800px;">
+        <p style="padding: 20px; color: var(--secondary-text-clr);">Loading reports...</p>
+    </div>
+</div>
+
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
     <div class="panel">
         <div class="panel-header">
@@ -364,29 +383,6 @@
             <div class="modal-footer">
                 <button class="btn-secondary" id="cancelEditBtn">Cancel</button>
                 <button class="btn-primary" id="saveUserBtn">Save Changes</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="assignVolunteerModal" class="modal" hidden>
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Approve Case</h2>
-                <button class="close-modal" id="closeAssignModal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" id="assignCaseId">
-                <input type="hidden" id="assignCaseTitle">
-                <div class="form-group">
-                    <label for="assignVolunteerSelect">Assign Volunteer (Optional)</label>
-                    <select id="assignVolunteerSelect">
-                        <option value="">No assignment</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="cancelAssignBtn">Cancel</button>
-                <button class="btn-primary" id="confirmApproveBtn">Confirm Approve</button>
             </div>
         </div>
     </div>

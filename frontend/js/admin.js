@@ -30,12 +30,52 @@ async function loadAdminData() {
         progCases.style.width = `${Math.min(100, (reports.length / 50) * 100)}%`;
     }
     
-    let adoptedCount = reports.filter(r => r.status_name === 'closed').length;
+    let adoptedCount = reports.filter(r => r.status_name === 'Closed' || r.status_name === 'closed').length;
     const statAdoptions = document.getElementById('statAdoptions');
     const progAdoptions = document.getElementById('progAdoptions');
     if (statAdoptions) {
         statAdoptions.textContent = adoptedCount;
         progAdoptions.style.width = `${reports.length > 0 ? (adoptedCount / reports.length) * 100 : 0}%`;
+    }
+
+    const reportsContainer = document.getElementById('reportsContainer');
+    if (reportsContainer) {
+        reportsContainer.innerHTML = '';
+        if (reports.length === 0) {
+            reportsContainer.innerHTML = '<p style="padding: 20px; color: var(--secondary-text-clr);">No reports found.</p>';
+        } else {
+            console.log("Reports loaded:", reports);
+            reports.forEach(report => {
+                const dateStr = report.created_at ? new Date(report.created_at).toLocaleDateString() : 'N/A';
+                
+                let urgencyClass = 'tag-pending';
+                if (report.urgency_level) {
+                    const u = report.urgency_level.toLowerCase();
+                    if (u === 'high' || u === 'critical') urgencyClass = 'tag-canceled';
+                    else if (u === 'low') urgencyClass = 'tag-confirmed';
+                }
+
+                let statusClass = 'tag-pending';
+                if (report.status_name) {
+                    const s = report.status_name.toLowerCase();
+                    if (s === 'closed' || s === 'resolved') statusClass = 'tag-confirmed';
+                    else if (s === 'in progress' || s === 'in treatment' || s === 'stable') statusClass = 'tag-active';
+                }
+                
+                const html = `
+                <div class="table-row" style="grid-template-columns: 0.5fr 1fr 1fr 1.5fr 0.8fr 1fr 1.2fr 1fr; min-width: 800px;">
+                    <span class="table-name">#${report.report_id}</span>
+                    <span class="table-email">${report.animal_type || 'N/A'}</span>
+                    <span class="table-email">${report.animal_condition || 'N/A'}</span>
+                    <span class="table-email" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${report.description || ''}">${report.description || 'N/A'}</span>
+                    <span class="event-tag ${urgencyClass}">${report.urgency_level || 'N/A'}</span>
+                    <span class="event-tag ${statusClass}">${report.status_name || 'Open'}</span>
+                    <span class="table-email">${report.reported_by || 'Anonymous'}<br><small>${report.contact_phone || report.contact_email || ''}</small></span>
+                    <span class="table-joined">${dateStr}</span>
+                </div>`;
+                reportsContainer.insertAdjacentHTML('beforeend', html);
+            });
+        }
     }
 
     try {
@@ -100,7 +140,7 @@ async function loadAdminData() {
         approvalsList.innerHTML = '';
         let hasPendingItems = false;
 
-        const pendingReports = reports.filter(r => r.status_name === 'open');
+        const pendingReports = reports.filter(r => r.status_name === 'open' || r.status_name === 'Open');
         if (pendingReports.length > 0) {
             hasPendingItems = true;
             pendingReports.forEach(rep => {
