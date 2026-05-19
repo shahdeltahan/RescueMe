@@ -25,7 +25,7 @@ const adoptionController = {
         LEFT JOIN REPORT_LOCATION rl ON cr.report_id = rl.report_id
         LEFT JOIN LOCATION l ON rl.location_id = l.location_id
         LEFT JOIN ANIMAL an ON cr.report_id = an.report_id
-        LEFT JOIN ADOPTION_REQUEST ar ON ar.report_id = cr.report_id AND ar.status_id IN (3,4) -- Pending or Adopted
+        LEFT JOIN ADOPTION_REQUEST ar ON ar.animal_id = an.animal_id AND ar.status_id IN (3,4) -- Pending or Adopted
         WHERE rs.status_name = 'resolved' OR ar.adoption_request_id IS NOT NULL
         ORDER BY cr.report_id DESC
       `);
@@ -56,9 +56,15 @@ const adoptionController = {
       const userId = getUserId(req);
       const { reportId } = req.params;
 
+      const [animalRows] = await pool.query("SELECT animal_id FROM ANIMAL WHERE report_id = ?", [reportId]);
+      if (animalRows.length === 0) {
+        return res.status(404).json({ error: "Animal not found for adoption." });
+      }
+      const animalId = animalRows[0].animal_id;
+
       const [existing] = await pool.query(
-        "SELECT * FROM ADOPTION_REQUEST WHERE report_id = ? AND user_id = ?",
-        [reportId, userId]
+        "SELECT * FROM ADOPTION_REQUEST WHERE animal_id = ? AND user_id = ?",
+        [animalId, userId]
       );
 
       if (existing.length > 0) {
@@ -66,8 +72,8 @@ const adoptionController = {
       }
 
       await pool.query(
-        "INSERT INTO ADOPTION_REQUEST (user_id, report_id, status_id) VALUES (?, ?, 3)", // 3 = pending
-        [userId, reportId]
+        "INSERT INTO ADOPTION_REQUEST (user_id, animal_id, status_id) VALUES (?, ?, 3)", // 3 = pending
+        [userId, animalId]
       );
 
       // We leave the case open (resolved) so the volunteer can close it later.
@@ -128,7 +134,7 @@ const adoptionController = {
 
       // Fetch details for notifications
       const [requestRows] = await pool.query(
-        "SELECT user_id, report_id FROM ADOPTION_REQUEST WHERE adoption_request_id = ?",
+        "SELECT ar.user_id, an.report_id FROM ADOPTION_REQUEST ar JOIN ANIMAL an ON ar.animal_id = an.animal_id WHERE ar.adoption_request_id = ?",
         [requestId]
       );
 
