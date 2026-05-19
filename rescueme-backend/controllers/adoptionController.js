@@ -24,8 +24,8 @@ const adoptionController = {
         LEFT JOIN REPORT_STATUS rs ON cr.status_id = rs.status_id
         LEFT JOIN REPORT_LOCATION rl ON cr.report_id = rl.report_id
         LEFT JOIN LOCATION l ON rl.location_id = l.location_id
-        LEFT JOIN animal an ON cr.report_id = an.report_id
-        LEFT JOIN adoption_request ar ON ar.report_id = cr.report_id AND ar.status_id IN (3,4) -- Pending or Adopted
+        LEFT JOIN ANIMAL an ON cr.report_id = an.report_id
+        LEFT JOIN ADOPTION_REQUEST ar ON ar.report_id = cr.report_id AND ar.status_id IN (3,4) -- Pending or Adopted
         WHERE rs.status_name = 'resolved' OR ar.adoption_request_id IS NOT NULL
         ORDER BY cr.report_id DESC
       `);
@@ -57,7 +57,7 @@ const adoptionController = {
       const { reportId } = req.params;
 
       const [existing] = await pool.query(
-        "SELECT * FROM adoption_request WHERE report_id = ? AND user_id = ?",
+        "SELECT * FROM ADOPTION_REQUEST WHERE report_id = ? AND user_id = ?",
         [reportId, userId]
       );
 
@@ -66,7 +66,7 @@ const adoptionController = {
       }
 
       await pool.query(
-        "INSERT INTO adoption_request (user_id, report_id, status_id) VALUES (?, ?, 3)", // 3 = pending
+        "INSERT INTO ADOPTION_REQUEST (user_id, report_id, status_id) VALUES (?, ?, 3)", // 3 = pending
         [userId, reportId]
       );
 
@@ -118,7 +118,7 @@ const adoptionController = {
       const statusId = status === 'accepted' ? 4 : 5; // Assuming 4 is approved, 5 is rejected
 
       const [result] = await pool.query(
-        "UPDATE adoption_request SET status_id = ? WHERE adoption_request_id = ?",
+        "UPDATE ADOPTION_REQUEST SET status_id = ? WHERE adoption_request_id = ?",
         [statusId, requestId]
       );
 
@@ -128,7 +128,7 @@ const adoptionController = {
 
       // Fetch details for notifications
       const [requestRows] = await pool.query(
-        "SELECT user_id, report_id FROM adoption_request WHERE adoption_request_id = ?",
+        "SELECT user_id, report_id FROM ADOPTION_REQUEST WHERE adoption_request_id = ?",
         [requestId]
       );
 
