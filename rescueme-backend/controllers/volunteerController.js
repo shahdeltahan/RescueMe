@@ -133,7 +133,7 @@ const volunteerController = {
       }
 
       const [caseRows] = await connection.query("SELECT animal_type FROM CASE_REPORT WHERE report_id = ?", [reportId]);
-      const [animalExists] = await connection.query("SELECT * FROM animal WHERE report_id = ?", [reportId]);
+      const [animalExists] = await connection.query("SELECT * FROM ANIMAL WHERE report_id = ?", [reportId]);
       if (animalExists.length === 0) {
           let speciesId = 1; // Default Dog
           const typeLower = caseRows.length > 0 && caseRows[0].animal_type ? caseRows[0].animal_type.toLowerCase() : '';
@@ -143,12 +143,12 @@ const volunteerController = {
           else if (typeLower.includes('turtle')) speciesId = 5;
 
           await connection.query(
-              "INSERT INTO animal (report_id, species_id, gender, health_status_id, adoption_status_id) VALUES (?, ?, 'Unknown', 6, 2)",
+              "INSERT INTO ANIMAL (report_id, species_id, gender, health_status_id, adoption_status_id) VALUES (?, ?, 'Unknown', 6, 2)",
               [reportId, speciesId]
           );
       } else {
           await connection.query(
-              "UPDATE animal SET health_status_id = 6, adoption_status_id = 2 WHERE report_id = ?",
+              "UPDATE ANIMAL SET health_status_id = 6, adoption_status_id = 2 WHERE report_id = ?",
               [reportId]
           );
       }

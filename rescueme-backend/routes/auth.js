@@ -248,7 +248,7 @@ router.get("/profile", async (req, res) => {
         }
 
         const [profiles] = await pool.query(
-            "SELECT profile_picture, address, bio FROM profile WHERE user_id = ?",
+            "SELECT profile_picture, address, bio FROM PROFILE WHERE user_id = ?",
             [userId]
         );
 
@@ -291,15 +291,15 @@ router.put("/profile", async (req, res) => {
             [full_name, email, phone_number, userId]
         );
 
-        const [profiles] = await pool.query("SELECT profile_id FROM profile WHERE user_id = ?", [userId]);
+        const [profiles] = await pool.query("SELECT profile_id FROM PROFILE WHERE user_id = ?", [userId]);
         if (profiles.length > 0) {
             await pool.query(
-                "UPDATE profile SET profile_picture = ?, address = ?, bio = ? WHERE user_id = ?",
+                "UPDATE PROFILE SET profile_picture = ?, address = ?, bio = ? WHERE user_id = ?",
                 [profile_picture, address, bio, userId]
             );
         } else {
             await pool.query(
-                "INSERT INTO profile (user_id, profile_picture, address, bio) VALUES (?, ?, ?, ?)",
+                "INSERT INTO PROFILE (user_id, profile_picture, address, bio) VALUES (?, ?, ?, ?)",
                 [userId, profile_picture, address, bio]
             );
         }

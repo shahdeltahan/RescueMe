@@ -86,7 +86,7 @@ const veterinaryController = {
             await connection.query("UPDATE volunteer_case_assignment SET progress_status = 'stable' WHERE report_id = ?", [id]);
 
             // Add to ANIMAL table for adoption if not already there
-            const [animalExists] = await connection.query("SELECT * FROM animal WHERE report_id = ?", [id]);
+            const [animalExists] = await connection.query("SELECT * FROM ANIMAL WHERE report_id = ?", [id]);
             if (animalExists.length === 0) {
                 let speciesId = 1; // Default Dog
                 const typeLower = caseRows[0].animal_type ? caseRows[0].animal_type.toLowerCase() : '';
@@ -99,11 +99,11 @@ const veterinaryController = {
                 const insertGender = gender || 'Unknown';
 
                 await connection.query(
-                    "INSERT INTO animal (report_id, species_id, estimated_age, gender, health_status_id, adoption_status_id) VALUES (?, ?, ?, ?, 6, 2)",
+                    "INSERT INTO ANIMAL (report_id, species_id, estimated_age, gender, health_status_id, adoption_status_id) VALUES (?, ?, ?, ?, 6, 2)",
                     [id, speciesId, insertAge, insertGender]
                 );
             } else {
-                let updateQ = "UPDATE animal SET health_status_id = 6, adoption_status_id = 2";
+                let updateQ = "UPDATE ANIMAL SET health_status_id = 6, adoption_status_id = 2";
                 const queryParams = [];
                 if (age !== undefined && age !== null) {
                     updateQ += ", estimated_age = ?";
@@ -145,7 +145,7 @@ const veterinaryController = {
           a.purpose AS reason,
           a.scheduled_date AS date,
           cr.animal_type AS patient
-        FROM followup_appointment a
+        FROM FOLLOWUP_APPOINTMENT a
         JOIN CASE_REPORT cr ON a.report_id = cr.report_id
         WHERE a.status = 'scheduled' AND a.created_by = ?
         ORDER BY a.scheduled_date ASC
@@ -163,7 +163,7 @@ const veterinaryController = {
       const { report_id, reason, date } = req.body;
 
       const [result] = await pool.query(
-        "INSERT INTO followup_appointment (report_id, purpose, scheduled_date, created_by) VALUES (?, ?, ?, ?)",
+        "INSERT INTO FOLLOWUP_APPOINTMENT (report_id, purpose, scheduled_date, created_by) VALUES (?, ?, ?, ?)",
         [report_id, reason, new Date(date), userId]
       );
 
@@ -190,7 +190,7 @@ const veterinaryController = {
   deleteAppointment: async (req, res) => {
     try {
       const { id } = req.params;
-      await pool.query("UPDATE followup_appointment SET status = 'cancelled' WHERE appointment_id = ?", [id]);
+      await pool.query("UPDATE FOLLOWUP_APPOINTMENT SET status = 'cancelled' WHERE appointment_id = ?", [id]);
       res.json({ message: "Appointment cancelled" });
     } catch (error) {
       console.error("Delete appointment error:", error);
